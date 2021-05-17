@@ -1,0 +1,41 @@
+{
+    "food_items": [
+        {
+            "name": "Spicy Taco",
+            "recipe": {
+                "mixed_condiments": 1,
+                "ground_beef": 2,
+                "burger_bun": 1
+            },
+            "cost": 650,
+            "img": "spicy_taco"
+        },
+        {
+            "name": "Carne Asada Taco",
+            "recipe": {
+                "frozen_french_fries": 1
+            },
+            "cost": 150,
+            "img": "carne_asada_taco"
+        },
+        {
+            "name": "Green Taco",
+            "recipe": {
+                "cola": 1
+            },
+            "cost": 100,
+            "img": "green_taco"
+        },
+        {
+            "name": "Beer",
+            "recipe": {
+                "cola": 1
+            },
+            "cost": 100,
+            "img": "beer"
+        }
+    ],
+    "menu_data": {
+        "restaurant_name": "the Taco Farmer"
+    }
+}
