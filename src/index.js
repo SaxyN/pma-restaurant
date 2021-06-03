@@ -18,6 +18,8 @@ import Order from './components/Order';
 import MenuContainer from './containers/MenuContainer';
 
 import Menu from './components/Menu';
+import OrderContainer from "./containers/OrderContainer";
+import AdminContainer from "./containers/AdminContainer";
 
 const middle = [thunk, logger];
 const store = createStore(combineReducers, applyMiddleware(...middle));
@@ -31,6 +33,8 @@ ReactDOM.render(
                         <MainContainer>
                             <Switch>
                                 <Route exact path="/" component={MenuContainer}></Route>
+                                <Route exact path="/orders" component={OrderContainer}></Route>
+                                <Route exact path="/admin" component={AdminContainer}></Route>
                             </Switch>
                         </MainContainer>
                     </HashRouter>

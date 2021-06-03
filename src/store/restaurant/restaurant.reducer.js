@@ -4,6 +4,7 @@ const initialState = {
     showUI: false,
     food_items: [],
     menu_data: null,
+    user_data: null,
     cart: [],
     // cart: [{label: "Carne Asada Taco", name: "carne_asada_taco", count: 1, cost: 300},{label: "Spicy Taco", name: "spicy_taco", count: 2, cost: 600}],
 
@@ -40,6 +41,7 @@ export const restaurantReducer = (state = initialState, action) => {
                 ...state,
                 food_items: action.payload.food_items,
                 menu_data: action.payload.menu_data,
+                user_data: action.payload.user_data,
             }
         case types.LOAD_RESTAURANT_DATA_FAILURE:
             return {

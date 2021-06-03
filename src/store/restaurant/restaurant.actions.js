@@ -7,6 +7,8 @@ export const LOAD_RESTAURANT_DATA_SUCCESS = "LOAD_RESTAURANT_DATA_SUCCESS";
 export const LOAD_RESTAURANT_DATA_FAILURE = "LOAD_RESTAURANT_DATA_FAILURE";
 
 export const UPDATE_CART = "UPDATE_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
 export const CLEAR_RESTAURANT_DATA = "CLEAR_RESTAURANT_DATA";
 
@@ -63,10 +65,57 @@ export const hideUI = () => {
 export const updateCart = (data) => {
     return (dispatch) => {
         dispatch({
-            type: UPDATE_CART, payload: data
+            type: UPDATE_CART, payload: data,
         })
     }
 }
+
+export const addToCart = (items, item, cart) => {
+    return (dispatch) => {
+        let clonedItems = new Map(items);
+        let clonedCart = new Map(cart);
+
+        if (clonedItems.get(item.name).quantity < 0) {
+            clonedItems.get(item.name).quantity = 0;
+        } else {
+            clonedCart.get(item.name).quantity++;
+        }
+
+        const data = {
+            cart: clonedCart,
+            items: clonedItems,
+        };
+
+        dispatch({
+            type: ADD_TO_CART,
+            payload: data,
+        })
+    }
+}
+
+export const removeFromCart = (items, item, cart) => {
+    return (dispatch) => {
+        let clonedItems = new Map(items);
+        let clonedCart = new Map(cart);
+
+        clonedCart.get(item.name).quantity -= 1;
+        if (clonedCart.get(item.name).quantity < 0) {
+            clonedCart.get(item.name).quantity = 0;
+        } else {
+            clonedItems.get(item.name).quantity++;
+        }
+
+        const data = {
+            cart: clonedCart,
+            items: clonedItems,
+        };
+
+        dispatch({
+            type: REMOVE_FROM_CART,
+            payload: data,
+        });
+    };
+};
 
 export const clearRestaurantData = () => {
     return (dispatch) => {

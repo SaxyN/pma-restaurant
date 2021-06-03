@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect } from 'react';
-import { makeStyles, Typography, Grid, Button, Card, CardActions, CardContent, Paper, CardMedia, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import withMainMenu from '../hoc/withMainMenu';
+import React, { Fragment } from 'react';
+import { makeStyles, Typography, Grid, Button, Card, CardActions, CardContent, Paper, CardMedia, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List, Box, AccordionSummary, Accordion, AccordionDetails } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     mainDiv: {
@@ -71,42 +70,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Cart = ({handleCartRemove, handleCartUpdate, placeOrder, cart}) => {
+const Cart2 = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const [customerName, setCustomerName] = React.useState("");
-    const [cartHolder, setCartHolder] = React.useState([]);
-    // const cart = useSelector((state) => state.restaurant.cart);
-
-    const renderCart = () => {
-        console.log("BOOM")
-        if (cart.length > 0) {
-            setCartHolder(cart)
-            // console.log(cart);
-            return cart
-            .sort((a,b) => b.cost - a.cost)
-            .map((item, index) => {
-                return (
-                    <ListItem key={index} dense>
-                        <ListItemText primary={item.label} secondary={
-                            <Fragment>
-                                ${item.cost*item.count}
-                            </Fragment>
-                        }/>
-                        <ListItemSecondaryAction style={{top: "65%"}}>
-                            <ButtonGroup className={classes.cartButtonGroup} variant="text">
-                                <Button onClick={() => handleCartRemove(item.label, item.name, item.cost)}>-</Button>
-                                <Button><strong>{item.count}</strong></Button>
-                                <Button onClick={() => handleCartUpdate(item.label, item.name, item.cost)}>+</Button>
-                            </ButtonGroup>
-                        </ListItemSecondaryAction>
-                    </ListItem>
-                )
-            })
-        } else {
-            return <Typography style={{ textAlign: "center"}} variant="body2" color="textSecondary">Empty</Typography>;
-        }
-    }
+    const cartData = useSelector((state) => state.restaurant.cart);
 
     return (
         <Fragment>
@@ -115,7 +81,30 @@ const Cart = ({handleCartRemove, handleCartUpdate, placeOrder, cart}) => {
                     <Typography className="listTitle" component="h2">Cart</Typography>
                     <Divider orientation="horizontal" />
                     <List>
-                        {renderCart()}
+                        {cartData.length > 0 ? cartData
+                            .map((item, index) => {
+                                return (
+                                    <ListItem key={index} dense>
+                                        <ListItemText primary={item.label} secondary={
+                                            <Fragment>
+                                                ${item.cost*item.count}
+                                            </Fragment>
+                                        }/>
+                                        <ListItemSecondaryAction style={{top: "65%"}}>
+                                            <ButtonGroup className={classes.cartButtonGroup} variant="text">
+                                                <Button onClick={() => handleCartRemove(item.label, item.name, item.cost)}>-</Button>
+                                                <Button><strong>{item.count}</strong></Button>
+                                                <Button onClick={() => handleCartUpdate(item.label, item.name, item.cost)}>+</Button>
+                                            </ButtonGroup>
+                                        </ListItemSecondaryAction>
+                                    </ListItem>
+                                )   
+                            })
+                            :
+                            <Fragment>
+                                <Typography style={{textAlign: "center"}}>Empty!</Typography>
+                            </Fragment>
+                        }
                     </List>
                     <div style={{ textAlign: "center" }}>
                         {/* <TextField className="input" size="medium" value={customerName} onChange={(e) => setCustomerName(e.target.value)}/> */}
@@ -128,4 +117,4 @@ const Cart = ({handleCartRemove, handleCartUpdate, placeOrder, cart}) => {
     )
 }
 
-export default Cart;
+export default Cart2;

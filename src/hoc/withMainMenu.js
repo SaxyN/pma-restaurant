@@ -70,26 +70,51 @@ const withMainMenu = (WrappedComponent) => (props) => {
                 const newData = cartData
                 newData[i].count += 1;
                 newData[i].cost += cost;
-                dispatch(restActions.updateCart(newData));
+                dispatch(restActions.updateCart(newData, menuData));
                 break;
             }
         }
         if (!found) {
             const newData = cartData;
             newData.push({label: label, name: name, cost: cost, count: 1});
-            dispatch(restActions.updateCart(newData));
+            dispatch(restActions.updateCart(newData, menuData));
         }
     }
+
+    
+    // const handleCartUpdate = (label, name, cost) => {
+    //     console.log(label, name, cost)
+    //     var i;
+    //     var found = false;
+    //     for(i = 0; i < cart.length; i++) {
+    //         if (cart[i].name === name) {
+    //             found = true
+    //             const newData = cart;
+    //             newData[i].count += 1;
+    //             newData[i].cost = newData[i].cost + cost;
+    //             console.log(newData);
+    //             setCart(newData);
+    //             dispatch(restActions.updateCart(newData, menuData));
+    //             break;
+    //         }
+    //     }
+    //     if (!found) {
+    //         const newData = cart;
+    //         newData.push({label: label, name: name, cost: cost, count: 1});
+    //         console.log(newData);
+    //         dispatch(restActions.updateCart(newData, menuData));
+    //     }
+    // }
 
     const handleCartRemove = (name, label) => {
 
     }
 
     const renderMenu = () => {
-        if (menuData) {
+        if (foodData) {
             return foodData.map((item, index) => {
                 return (
-                    <Grid item key={index} xs={3}>
+                    <Grid item key={index} xs={3}>  
                         <Card className={classes.cardMain}>
                             <CardContent className="cardContent">
                                 <ItemImage name={item.img} />
@@ -97,9 +122,17 @@ const withMainMenu = (WrappedComponent) => (props) => {
                                 <Typography color="textSecondary" component="p">${item.cost}</Typography>
                             </CardContent>
                             <CardActions className="cardActions">
-                                <Button size="small" color="primary" variant="outlined" onClick={() => handleCartUpdate(item.name, item.img, item.cost)}>
-                                    Add To Order
-                                </Button>
+                                <ButtonGroup>
+                                    {   item.in_cart === 0 
+                                        ?
+                                        <Button disabled size="small" color="primary" variant="outlined">-</Button>
+                                        :
+                                        <Button size="small" color="primary" variant="outlined" onClick={() => handleCartRemove(item.name, item.img, item.cost)}>-</Button>
+                                    }
+                                    {/* <Button size="small" color="primary" variant="outlined" onClick={() => handleCartRemove(item.name, item.img, item.cost)}>-</Button> */}
+                                    <Button size="small" >{item.in_cart}</Button>
+                                    <Button size="small" color="primary" variant="outlined" onClick={() => handleCartAdd(item.name, item.img, item.cost)}>+</Button>
+                                </ButtonGroup>
                             </CardActions>
                         </Card>
                     </Grid>

@@ -1,13 +1,13 @@
 import { Fragment } from 'react';
-import { Fade, makeStyles, Grid, Button, Toolbar, AppBar } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { Fade, makeStyles, Grid, Button, Toolbar, AppBar, useScrollTrigger } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import * as restActions from '../store/restaurant/restaurant.actions';
 
 import Order from '../components/Order';
 import Header from '../components/Header';
 import Listener from './Listener';
 
 import * as UIActions from '../store/restaurant/restaurant.actions';
-
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -53,9 +53,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const showUI = useSelector((state) => state.restaurant.showUI);
     const menuData = useSelector((state) => state.restaurant.menu_data);
-    
+    const cartData = useSelector((state) => state.restaurant.cart);
 
     const renderEnvironment = () => {
         if (process.env.NODE_ENV === "development") { // Development
@@ -63,7 +64,7 @@ export default (props) => {
                 <Fade in={showUI} timeout={1000,1000}>
                     <div className={classes.main}>
                         <Listener />
-                        <Header menuData={menuData}/>
+                        <Header />
                         <Grid className="container" container>
                             <Grid className="wrapper" justify="center" container>{props.children}</Grid>
                         </Grid>
@@ -72,15 +73,15 @@ export default (props) => {
             )
         } else { // Live
             return (
-                <Fade in={showUI} timeout={1000,1000}>
-                    <div className={classes.main}>
-                        <Listener />
-                        <Header menuData={menuData}/>
-                        <Grid container className="container" justify="space-evenly">
-                            {props.children}
-                        </Grid>
-                    </div>
-                </Fade>
+            <Fade in={showUI} timeout={1000,1000}>
+                <div className={classes.main}>
+                    <Listener />
+                    <Header />
+                    <Grid className="container" container>
+                        <Grid className="wrapper" justify="center" container>{props.children}</Grid>
+                    </Grid>
+                </div>
+            </Fade>
             )
         }
     }

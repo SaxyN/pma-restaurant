@@ -8,6 +8,7 @@
                 "burger_bun": 1
             },
             "cost": 650,
+            "in_cart": 0,
             "img": "spicy_taco"
         },
         {
@@ -16,6 +17,7 @@
                 "frozen_french_fries": 1
             },
             "cost": 150,
+            "in_cart": 0,
             "img": "carne_asada_taco"
         },
         {
@@ -24,6 +26,7 @@
                 "cola": 1
             },
             "cost": 100,
+            "in_cart": 0,
             "img": "green_taco"
         },
         {
@@ -32,10 +35,46 @@
                 "cola": 1
             },
             "cost": 100,
+            "in_cart": 1,
             "img": "beer"
+        },
+        {
+            "name": "Garlic",
+            "recipe": {
+                "cola": 1
+            },
+            "cost": 150,
+            "in_cart": 0,
+            "img": "garlic"
         }
     ],
     "menu_data": {
         "restaurant_name": "the Taco Farmer"
-    }
+    },
+    "user_data": {
+        "name": "Derek Fhreebs",
+        "job_name": "boss"
+    },
+    "orders": [
+        {
+            "customer": "Eduardo Chupador",
+            "items": [
+                {
+                    "name": "Garlic",
+                    "count": 2,
+                    "img": "garlic"
+                }
+            ]
+        },
+        {
+            "customer": "Derek Fhreebs",
+            "items": [
+                {
+                    "name": "Burger",
+                    "count": 2,
+                    "img": "burger"
+                }
+            ]
+        }
+    ]
 }
