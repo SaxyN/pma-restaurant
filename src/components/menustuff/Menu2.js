@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Typography, Grid, Button, Card, CardActions, CardContent, Paper, CardMedia, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List, Box, AccordionSummary, Accordion, AccordionDetails } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import ItemImage from '../ItemImage';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import * as restActions from '../../store/restaurant/restaurant.actions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,10 +59,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Menu2 = () => {
+const Menu2 = ({handleCartAdd, handleCartBulkAdd, foodData, userData}) => {
     const classes = useStyles();
-    const foodData = useSelector((state) => state.restaurant.food_items);
-    const userData = useSelector((state) => state.restaurant.user_data);
+    const dispatch = useDispatch();
 
     return (
         <Fragment>
@@ -76,7 +77,7 @@ const Menu2 = () => {
                                         <Card className={classes.cardMain}>
                                             <CardContent className="cardContent">
                                                 <ItemImage name={item.img}/>
-                                                <Typography variant="h5" component="h2">{item.name}</Typography>
+                                                <Typography variant="h6" component="h2">{item.name}</Typography>
                                                 <Typography color="textSecondary" component="p">${item.cost}</Typography>
                                             </CardContent>
                                             <CardActions className="cardActions">

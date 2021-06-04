@@ -62,33 +62,39 @@ export const hideUI = () => {
     }
 }
 
-export const updateCart = (data) => {
+export const updateCart = (cart) => {
     return (dispatch) => {
         dispatch({
-            type: UPDATE_CART, payload: data,
+            type: UPDATE_CART, payload: cart,
         })
     }
 }
 
-export const addToCart = (items, item, cart) => {
+export const addToCart = (itemLabel, itemName, itemCost, cart) => {
+    var i;
+    var found = false;
+    var newData;
+    for(i = 0; i < cart.length; i++) {
+        if (cart[i].name === itemName) {
+            found = true
+            if (cart[i].count + 1 <= 5) {
+                newData = cart;
+                newData[i].count += 1;
+                newData[i].cost = newData[i].cost + itemCost;
+                break;
+            } else {
+                break;
+            }
+        } 
+    }
+    if (!found) {
+        newData = cart;
+        newData.push({label: itemLabel, name: itemName, cost: itemCost, count: 1});
+    }
+
     return (dispatch) => {
-        let clonedItems = new Map(items);
-        let clonedCart = new Map(cart);
-
-        if (clonedItems.get(item.name).quantity < 0) {
-            clonedItems.get(item.name).quantity = 0;
-        } else {
-            clonedCart.get(item.name).quantity++;
-        }
-
-        const data = {
-            cart: clonedCart,
-            items: clonedItems,
-        };
-
         dispatch({
-            type: ADD_TO_CART,
-            payload: data,
+            type: ADD_TO_CART, payload: newData,
         })
     }
 }

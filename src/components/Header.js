@@ -54,9 +54,14 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const userData = useSelector((state) => state.restaurant.user_data);
-    const menuData = useSelector((state) => state.restaurant.menu_data);
-    const cartData = useSelector((state) => state.restaurant.cart);
+    const {userData, menuData, cartData} = useSelector((state) => ({
+        userData: state.restaurant.user_data,
+        menuData: state.restaurant.menu_data,
+        cartData: state.restaurant.cart,
+    }))
+    // const userData = useSelector((state) => state.restaurant.user_data);
+    // const menuData = useSelector((state) => state.restaurant.menu_data);
+    // const cartData = useSelector((state) => state.restaurant.cart);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -138,7 +143,7 @@ const Header = () => {
                                 }
                             </ButtonGroup>
                         </Grid>
-                        <Grid>
+                        {/* <Grid>
                             <Box>
                                 <Button aria-describedby={id} variant="outlined" onClick={(e) => handleClick(e)}>
                                     Cart
@@ -154,16 +159,16 @@ const Header = () => {
                                     <List>
                                         {renderCart()}
                                     </List>
-                                    {cartData.length > 0 ?                                     <div style={{ textAlign: "center" }}>
+                                    {cartData.length > 0 ?                                     <div style={{ textAlign: "center" }}> */}
                                         {/* <TextField className="input" size="medium" value={customerName} onChange={(e) => setCustomerName(e.target.value)}/> */}
-
+{/* 
                                         <Button className="submitButton" variant="contained" color="primary" onClick={() => placeOrder()}>Submit Order</Button>
                                     </div> : null
                                     }
 
                                 </Card>
                             </Popover>
-                        </Grid>
+                        </Grid> */}
                         <Grid className="wrapper" justify="flex-end" container>
                             <Box className="wrapper">
                                 <Button>

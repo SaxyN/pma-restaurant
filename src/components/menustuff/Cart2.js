@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Typography, Grid, Button, Card, CardActions, CardContent, Paper, CardMedia, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List, Box, AccordionSummary, Accordion, AccordionDetails } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     mainDiv: {
@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         // width: "100%",
         justifyContent: "center",
         "& .card": {
-            minWidth: "150px",
+            minWidth: "200px",
             backgroundColor: "#C0B87E",
             padding: "10px",
             "& .listTitle": {
@@ -70,9 +70,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Cart2 = () => {
+const Cart2 = ({cartData, handleCartRemove, handleCartAdd}) => {
     const classes = useStyles();
-    const cartData = useSelector((state) => state.restaurant.cart);
+    // const cartData = useSelector((state) => state.restaurant.cart);
 
     return (
         <Fragment>
@@ -87,14 +87,14 @@ const Cart2 = () => {
                                     <ListItem key={index} dense>
                                         <ListItemText primary={item.label} secondary={
                                             <Fragment>
-                                                ${item.cost*item.count}
+                                                ${item.cost}
                                             </Fragment>
                                         }/>
                                         <ListItemSecondaryAction style={{top: "65%"}}>
                                             <ButtonGroup className={classes.cartButtonGroup} variant="text">
-                                                <Button onClick={() => handleCartRemove(item.label, item.name, item.cost)}>-</Button>
+                                                <Button onClick={() => handleCartRemove(item.label, item.name, item.cost/item.count)}>-</Button>
                                                 <Button><strong>{item.count}</strong></Button>
-                                                <Button onClick={() => handleCartUpdate(item.label, item.name, item.cost)}>+</Button>
+                                                <Button onClick={() => handleCartAdd(item.label, item.name, item.cost/item.count)}>+</Button>
                                             </ButtonGroup>
                                         </ListItemSecondaryAction>
                                     </ListItem>

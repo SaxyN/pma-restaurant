@@ -57,6 +57,11 @@ export const restaurantReducer = (state = initialState, action) => {
                 ...state,
                 cart: action.payload,
             }
+        case types.ADD_TO_CART:
+            return {
+                ...state,
+                cart: action.payload,
+            }
         case types.CLEAR_RESTAURANT_DATA:
             return {
                 ...state,

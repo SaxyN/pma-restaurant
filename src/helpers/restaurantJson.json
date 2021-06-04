@@ -37,15 +37,6 @@
             "cost": 100,
             "in_cart": 1,
             "img": "beer"
-        },
-        {
-            "name": "Garlic",
-            "recipe": {
-                "cola": 1
-            },
-            "cost": 150,
-            "in_cart": 0,
-            "img": "garlic"
         }
     ],
     "menu_data": {
@@ -53,7 +44,7 @@
     },
     "user_data": {
         "name": "Derek Fhreebs",
-        "job_name": "boss"
+        "job_name": "b"
     },
     "orders": [
         {

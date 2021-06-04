@@ -27,19 +27,15 @@ const store = createStore(combineReducers, applyMiddleware(...middle));
 ReactDOM.render(
     <Fragment>
         <Provider store={store}>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-                <SnackbarProvider dense maxSnack={3}>
-                    <HashRouter>
-                        <MainContainer>
-                            <Switch>
-                                <Route exact path="/" component={MenuContainer}></Route>
-                                <Route exact path="/orders" component={OrderContainer}></Route>
-                                <Route exact path="/admin" component={AdminContainer}></Route>
-                            </Switch>
-                        </MainContainer>
-                    </HashRouter>
-                </SnackbarProvider>
-            </MuiPickersUtilsProvider>
+            <HashRouter>
+                <MainContainer>
+                    <Switch>
+                        <Route exact path="/" component={MenuContainer}></Route>
+                        <Route exact path="/orders" component={OrderContainer}></Route>
+                        <Route exact path="/admin" component={AdminContainer}></Route>
+                    </Switch>
+                </MainContainer>
+            </HashRouter>
         </Provider>
     </Fragment>,
     document.getElementById("root")
