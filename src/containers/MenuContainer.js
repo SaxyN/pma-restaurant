@@ -87,8 +87,9 @@ const useStyles = makeStyles((theme) => ({
 const MenuContainer = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {cartData, foodData, userData} = useSelector((state) => ({
-        cartData: state.restaurant.cart,
+    const {cartData, foodData, userData, totalCost} = useSelector((state) => ({
+        totalCost: state.restaurant.cart.totalCost,
+        cartData: state.restaurant.cart.items,
         foodData: state.restaurant.food_items,
         userData: state.restaurant.user_data,
     }));
@@ -114,15 +115,10 @@ const MenuContainer = () => {
         }
         if (!found) {
             console.log("Hmm how did we get here")
-            // const newData = cartData;
-            // newData.push({label: label, name: name, cost: cost, count: 1});
-            // console.log(newData);
-            // dispatch(restActions.updateCart(newData));
         }
     }
 
-    const handleCartFullRemove = (label, name, cost) => {
-        console.log("Removing from Cart: " + label, name, cost)
+    const handleCartFullRemove = (name) => {
         var i;
         var found = false;
         for(i = 0; i < cartData.length; i++) {
@@ -130,12 +126,6 @@ const MenuContainer = () => {
                 found = true
                 const newData = cartData;
                 newData.splice(i, 1);
-                // if (newData[i].count - 1 === 0) {
-                //     newData.splice(i, 1);
-                // } else {
-                //     newData[i].count -= 1;
-                //     newData[i].cost = newData[i].cost - cost;
-                // }
                 console.log(newData);
                 dispatch(restActions.updateCart(newData));
                 break;
@@ -143,10 +133,6 @@ const MenuContainer = () => {
         }
         if (!found) {
             console.log("Hmm how did we get here")
-            // const newData = cartData;
-            // newData.push({label: label, name: name, cost: cost, count: 1});
-            // console.log(newData);
-            // dispatch(restActions.updateCart(newData));
         }
     }
 
@@ -220,6 +206,8 @@ const MenuContainer = () => {
                 cartData={cartData}
                 handleCartRemove={handleCartRemove}
                 handleCartAdd={handleCartAdd}
+                totalCost={totalCost}
+                handleCartFullRemove={handleCartFullRemove}
             />
         </div>
     )

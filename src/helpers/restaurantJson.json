@@ -30,6 +30,15 @@
             "img": "green_taco"
         },
         {
+            "name": "Burger",
+            "recipe": {
+                "cola": 1
+            },
+            "cost": 1000,
+            "in_cart": 0,
+            "img": "burger"
+        },
+        {
             "name": "Beer",
             "recipe": {
                 "cola": 1
@@ -44,11 +53,12 @@
     },
     "user_data": {
         "name": "Derek Fhreebs",
-        "job_name": "b"
+        "job_name": "boss"
     },
     "orders": [
         {
             "customer": "Eduardo Chupador",
+            "cost": 300,
             "items": [
                 {
                     "name": "Garlic",
@@ -59,11 +69,22 @@
         },
         {
             "customer": "Derek Fhreebs",
+            "cost": 2650,
             "items": [
                 {
                     "name": "Burger",
                     "count": 2,
                     "img": "burger"
+                },
+                {
+                    "name": "Spicy Taco",
+                    "count": 2,
+                    "img": "spicy_taco"
+                },
+                {
+                    "name": "French Fries",
+                    "count": 2,
+                    "img": "french_fries"
                 }
             ]
         }

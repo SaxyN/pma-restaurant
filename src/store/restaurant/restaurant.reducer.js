@@ -5,7 +5,11 @@ const initialState = {
     food_items: [],
     menu_data: null,
     user_data: null,
-    cart: [],
+    cart: {
+        items: [],
+        totalCost: 0,
+    },
+    orders: [],
     // cart: [{label: "Carne Asada Taco", name: "carne_asada_taco", count: 1, cost: 300},{label: "Spicy Taco", name: "spicy_taco", count: 2, cost: 600}],
 
     errorMessage: {
@@ -42,6 +46,7 @@ export const restaurantReducer = (state = initialState, action) => {
                 food_items: action.payload.food_items,
                 menu_data: action.payload.menu_data,
                 user_data: action.payload.user_data,
+                orders: action.payload.orders
             }
         case types.LOAD_RESTAURANT_DATA_FAILURE:
             return {
@@ -55,7 +60,11 @@ export const restaurantReducer = (state = initialState, action) => {
         case types.UPDATE_CART:
             return {
                 ...state,
-                cart: action.payload,
+                cart: {
+                    ...state.cart,
+                    items: action.payload.items,
+                    totalCost: action.payload.totalCost,
+                },
             }
         case types.ADD_TO_CART:
             return {

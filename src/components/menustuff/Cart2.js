@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Typography, Grid, Button, Card, CardActions, CardContent, Paper, CardMedia, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List, Box, AccordionSummary, Accordion, AccordionDetails } from '@material-ui/core';
+import { makeStyles, Typography, Grid, Button, Card, CardActions, CardContent, Paper, CardMedia, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List, Box, AccordionSummary, Accordion, AccordionDetails, IconButton } from '@material-ui/core';
 import { useSelector, connect } from 'react-redux';
+
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
     mainDiv: {
@@ -21,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
         "& .submitButton": {
             marginTop: "6px",
             marginBottom: "6px",
+
+        },
+        "& .MuiIconButton-root": {
+            padding: "2px",
         }
     },
 
@@ -35,18 +41,21 @@ const useStyles = makeStyles((theme) => ({
             objectFit: "contain",
         },
         "& .cardContent": {
-            
+
         },
         "& .cardActions": {
             textAlign: "center",
             justifyContent: "center",
+        },
+        "& .totalCost": {
+            textAlign: "right",
         }
     },
     cartCard: {
         maxWidth: 100,
         textAlign: "center",
         "& .cardContent": {
-            
+
         },
         "& .cardActions": {
             textAlign: "center",
@@ -55,6 +64,10 @@ const useStyles = makeStyles((theme) => ({
     },
 
     cartItem: {
+    },
+
+    trashCan: {
+        padding: "2px",
     },
 
     cartButtonGroup: {
@@ -70,9 +83,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Cart2 = ({cartData, handleCartRemove, handleCartAdd}) => {
+const Cart2 = ({ cartData, handleCartRemove, handleCartAdd, totalCost, handleCartFullRemove }) => {
     const classes = useStyles();
     // const cartData = useSelector((state) => state.restaurant.cart);
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     return (
         <Fragment>
@@ -82,33 +99,36 @@ const Cart2 = ({cartData, handleCartRemove, handleCartAdd}) => {
                     <Divider orientation="horizontal" />
                     <List>
                         {cartData.length > 0 ? cartData
-                            .map((item, index) => {
-                                return (
-                                    <ListItem key={index} dense>
-                                        <ListItemText primary={item.label} secondary={
-                                            <Fragment>
-                                                ${item.cost}
-                                            </Fragment>
-                                        }/>
-                                        <ListItemSecondaryAction style={{top: "65%"}}>
-                                            <ButtonGroup className={classes.cartButtonGroup} variant="text">
-                                                <Button onClick={() => handleCartRemove(item.label, item.name, item.cost/item.count)}>-</Button>
-                                                <Button><strong>{item.count}</strong></Button>
-                                                <Button onClick={() => handleCartAdd(item.label, item.name, item.cost/item.count)}>+</Button>
-                                            </ButtonGroup>
-                                        </ListItemSecondaryAction>
-                                    </ListItem>
-                                )   
-                            })
-                            :
-                            <Fragment>
-                                <Typography style={{textAlign: "center"}}>Empty!</Typography>
-                            </Fragment>
+                                .map((item, index) => {
+                                    return (
+                                        <ListItem key={index} dense>
+                                            <ListItemText primary={item.label} secondary={
+                                                <Fragment>
+                                                    ${numberWithCommas(item.cost)}
+                                                </Fragment>
+                                            } />
+                                            <ListItemSecondaryAction style={{ top: "65%" }}>
+                                                <ButtonGroup className={classes.cartButtonGroup} variant="text">
+                                                    <Button onClick={() => handleCartRemove(item.label, item.name, item.cost / item.count)}>-</Button>
+                                                    <Button><strong>{item.count}</strong></Button>
+                                                    <Button onClick={() => handleCartAdd(item.label, item.name, item.cost / item.count)}>+</Button>
+                                                </ButtonGroup>
+                                                <IconButton onClick={() => handleCartFullRemove(item.name)}>
+                                                    <DeleteIcon className="trashCan"/>
+                                                </IconButton>
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
+                                    )
+                                })
+                                :
+                                <Fragment>
+                                    <Typography style={{ textAlign: "center" }}>Empty!</Typography>
+                                </Fragment>
                         }
                     </List>
                     <div style={{ textAlign: "center" }}>
                         {/* <TextField className="input" size="medium" value={customerName} onChange={(e) => setCustomerName(e.target.value)}/> */}
-
+                        <Typography className="totalCost" variant="body1"><strong>Total: ${numberWithCommas(totalCost)}</strong></Typography>
                         <Button className="submitButton" variant="contained" color="primary" onClick={() => placeOrder()}>Submit Order</Button>
                     </div>
                 </Card>

@@ -62,10 +62,22 @@ export const hideUI = () => {
     }
 }
 
-export const updateCart = (cart) => {
+export const updateCart = (items) => {
+    var cost = 0;
+
+    items.forEach(element => {
+        // console.log(element);
+        cost = cost + element.cost;
+    })
+    console.log(cost);
+    const data = {
+        items: items,
+        totalCost: cost,
+    };
+
     return (dispatch) => {
         dispatch({
-            type: UPDATE_CART, payload: cart,
+            type: UPDATE_CART, payload: data,
         })
     }
 }

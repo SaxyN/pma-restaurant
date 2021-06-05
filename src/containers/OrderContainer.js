@@ -10,9 +10,17 @@ const useStyles = makeStyles((theme) => ({
 
 const OrderContainer = () => {
     const classes = useStyles();
+    const {orderData} = useSelector((state) => ({
+        orderData: state.restaurant.orders
+    }));
+
+    const cookOrder = () => {
+        console.log("cooking Order")
+    }
+
     return (
         <Fragment>
-            <Order />
+            <Order orderData={orderData} cookOrder={cookOrder}/>
         </Fragment>
     )
 }

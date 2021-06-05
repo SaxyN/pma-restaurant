@@ -81,8 +81,6 @@ const Menu2 = ({handleCartAdd, handleCartBulkAdd, foodData, userData}) => {
                                                 <Typography color="textSecondary" component="p">${item.cost}</Typography>
                                             </CardContent>
                                             <CardActions className="cardActions">
-                                                {
-                                                    userData.job_name === "boss" ?
                                                     <Accordion>
                                                         <AccordionSummary
                                                         expandIcon={<ExpandMoreIcon />}>
@@ -90,14 +88,17 @@ const Menu2 = ({handleCartAdd, handleCartBulkAdd, foodData, userData}) => {
                                                         </AccordionSummary>
                                                         <AccordionDetails>
                                                             <Grid container justify="center" spacing={3}>
-                                                                <Grid item><Button onClick={() => handleCartAdd(item.name, item.img, item.cost)}>Add To Order</Button></Grid>
-                                                                <Grid item><Button onClick={() => handleCartBulkAdd(item.name, item.img, item.cost)}>Bulk Order</Button></Grid>
+                                                            <Grid item><Button onClick={() => handleCartAdd(item.name, item.img, item.cost)}>Add To Order</Button></Grid>
+                                                        {
+                                                            userData.job_name === "boss"
+                                                            ?
+                                                            <Grid item><Button onClick={() => handleCartBulkAdd(item.name, item.img, item.cost)}>Bulk Order</Button></Grid>
+                                                            :
+                                                            <>{null}</>
+                                                        }
                                                             </Grid>
                                                         </AccordionDetails>
                                                     </Accordion>
-                                                    :
-                                                    <Button className="submitButton" variant="outlined" onClick={() => handleCartAdd(item.name, item.img, item.cost)}>Add To Order</Button>
-                                                }
                                             </CardActions>
                                         </Card>
                                     </Grid>
