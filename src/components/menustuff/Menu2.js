@@ -63,6 +63,10 @@ const Menu2 = ({handleCartAdd, handleCartBulkAdd, foodData, userData}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
     return (
         <Fragment>
             <div className={classes.mainDiv}>
@@ -78,7 +82,7 @@ const Menu2 = ({handleCartAdd, handleCartBulkAdd, foodData, userData}) => {
                                             <CardContent className="cardContent">
                                                 <ItemImage name={item.img}/>
                                                 <Typography variant="h6" component="h2">{item.name}</Typography>
-                                                <Typography color="textSecondary" component="p">${item.cost}</Typography>
+                                                <Typography color="textSecondary" component="p">${numberWithCommas(item.cost)}</Typography>
                                             </CardContent>
                                             <CardActions className="cardActions">
                                                     <Accordion>

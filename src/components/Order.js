@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect} from 'react';
 import { makeStyles, Card, List, ListItem, ListItemText, AccordionSummary, Accordion, Typography, Divider, AccordionDetails, AccordionActions, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
         // display: "flex",
         width: "100%",
         backgroundColor: "#C0B87E",
+        padding: "10px",
         "& .titleText": {
             textAlign: "center",
             paddingTop: "5px",
@@ -66,7 +67,7 @@ const Order = ({cookOrder, orderData}) => {
                                         {item.items.map((item2, index2) => {
                                             return (
                                                 <div key={index2}>
-                                                    <ItemImage name={item2.img} className="image"/>
+                                                    <ItemImage name={item2.img} className="image" />
                                                     <Typography variant="body2" color="textSecondary">{item2.name} x{item2.count}</Typography>
                                                 </div>
                                             )
