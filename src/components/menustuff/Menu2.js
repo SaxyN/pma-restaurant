@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 175,
         // maxWidth: 175,
         textAlign: 'center',
+        backgroundColor: "#ECECEC",
         "& .image": {
             width: 135,
             height: 100,
@@ -78,7 +79,7 @@ const Menu2 = ({handleCartAdd, handleCartBulkAdd, foodData, userData}) => {
                             .map((item,index) => {
                                 return (
                                     <Grid item key={index} xs={3}>
-                                        <Card className={classes.cardMain}>
+                                        <Card className={classes.cardMain} elevation={3}>
                                             <CardContent className="cardContent">
                                                 <ItemImage name={item.img}/>
                                                 <Typography variant="h6" component="h2">{item.name}</Typography>
@@ -92,11 +93,11 @@ const Menu2 = ({handleCartAdd, handleCartBulkAdd, foodData, userData}) => {
                                                         </AccordionSummary>
                                                         <AccordionDetails>
                                                             <Grid container justify="center" spacing={3}>
-                                                            <Grid item><Button onClick={() => handleCartAdd(item.name, item.img, item.cost)}>Add To Order</Button></Grid>
+                                                            <Grid item><Button onClick={() => handleCartAdd(item.name, item.img, item.cost, item.recipe)}>Add To Order</Button></Grid>
                                                         {
                                                             userData.job_name === "boss"
                                                             ?
-                                                            <Grid item><Button onClick={() => handleCartBulkAdd(item.name, item.img, item.cost)}>Bulk Order</Button></Grid>
+                                                            <Grid item><Button onClick={() => handleCartBulkAdd(item.name, item.img, item.cost, item.recipe)}>Bulk Order</Button></Grid>
                                                             :
                                                             <>{null}</>
                                                         }

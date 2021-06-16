@@ -6,7 +6,7 @@ const webpack = require("webpack");
 module.exports = {
     entry: path.resolve(__dirname, "..", "./src/index.js"),
     output: {
-        path: path.resolve(__dirname, "..", "..", "./gta/dist"),
+        path: path.resolve("C:/FXServer/server-data/resources/pma-restaurant/dist"),
         filename: "bundle.js",
     },
     plugins: [

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as restActions from '../store/restaurant/restaurant.actions';
 import anotherJson from '../helpers/anotherJson.json';
+import * as apis from '../apis/apis';
 
 const useStyles = makeStyles((theme) => ({
     mainDiv: {
@@ -72,6 +73,10 @@ const Header = () => {
         setAnchorEl(null);
     }
 
+    const closeApplication = () => {
+        apis.closeTablet();
+    }
+
     const open = Boolean(anchorEl);
     const id = open ? 'simply-popover' : undefined;
 
@@ -126,7 +131,7 @@ const Header = () => {
                 <AppBar position="static" className="app-bar">
                     <Toolbar className="title-bar">
                         <Grid justify="flex-start" container>
-                            <Typography variant="h6">{menuData.restaurant_name}</Typography>
+                            <Typography variant="h6">{menuData}</Typography>
                         </Grid>
                         <Grid item justify="center" container>
                             <ButtonGroup>
@@ -171,7 +176,7 @@ const Header = () => {
                         </Grid> */}
                         <Grid className="wrapper" justify="flex-end" container>
                             <Box className="wrapper">
-                                <Button>
+                                <Button onClick={() => closeApplication()}>
                                     EXIT
                                 </Button>
                             </Box>

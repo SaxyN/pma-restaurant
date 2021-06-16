@@ -10,13 +10,15 @@ const useStyles = makeStyles((theme) => ({
 
 const AdminContainer = () => {
     const classes = useStyles();
-    const {foodData} = useSelector((state) => ({
+    const {foodData, tempPrice, selectedItem} = useSelector((state) => ({
         foodData: state.restaurant.food_items,
+        tempPrice: state.restaurant.tempPrice,
+        selectedItem: state.restaurant.selectedItem,
     }))
 
     return (
         <Fragment>
-            <Admin foodData={foodData}/>
+            <Admin foodData={foodData} tempPrice={tempPrice} selectedItem={selectedItem}/>
         </Fragment>
     )
 }

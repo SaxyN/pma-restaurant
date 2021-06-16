@@ -10,6 +10,8 @@ const initialState = {
         totalCost: 0,
     },
     orders: [],
+    tempPrice: "",
+    selectedItem: "",
     // cart: [{label: "Carne Asada Taco", name: "carne_asada_taco", count: 1, cost: 300},{label: "Spicy Taco", name: "spicy_taco", count: 2, cost: 600}],
 
     errorMessage: {
@@ -71,11 +73,29 @@ export const restaurantReducer = (state = initialState, action) => {
                 ...state,
                 cart: action.payload,
             }
+        case types.SET_TEMP_PRICE:
+            return {
+                ...state,
+                tempPrice: action.payload,
+            }
+        case types.SET_SELECTED_ITEM:
+            return {
+                ...state,
+                selectedItem: action.payload,
+            }
         case types.CLEAR_RESTAURANT_DATA:
             return {
                 ...state,
                 food_items: [],
                 menu_data: null
+            }
+        case types.CLEAR_CART:
+            return {
+                ...state,
+                cart: {
+                    items: [],
+                    totalCost: 0,
+                }
             }
         default:
             return state;

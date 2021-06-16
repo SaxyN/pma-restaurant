@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Typography, Grid, Button, Card, CardActions, CardContent, Paper, CardMedia, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List, Box, AccordionSummary, Accordion, AccordionDetails, IconButton } from '@material-ui/core';
+import { makeStyles, Typography, Button, Card, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List, IconButton, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, Input } from '@material-ui/core';
 import { useSelector, connect } from 'react-redux';
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -80,12 +80,37 @@ const useStyles = makeStyles((theme) => ({
 
     errorDiv: {
         marginTop: "25px"
-    }
+    },
 }))
 
-const Cart2 = ({ cartData, handleCartRemove, handleCartAdd, totalCost, handleCartFullRemove }) => {
+const Cart2 = ({ cartData, handleCartRemove, handleCartAdd, totalCost, handleCartFullRemove, placeOrder }) => {
     const classes = useStyles();
-    // const cartData = useSelector((state) => state.restaurant.cart);
+    const [open, setOpen] = React.useState(false);
+    const [error, setError] = React.useState(false);
+    const [customerName, setCustomerName] = React.useState("");
+
+    const handleSubmit = () => {
+        if (cartData.length > 0) {
+            setOpen(true);
+        }
+    }
+
+    const handleClose = (ready) => {
+        if (ready == true && customerName.length > 0) {
+            setOpen(false);
+            setError(false);
+            placeOrder(cartData, customerName);
+        } else if (ready === false) {
+            setOpen(false);
+            setError(false);
+        } else {
+            setError(true);
+        }
+    }
+
+    const handleCustomerName = (e) => {
+        setCustomerName(e.target.value);
+    }
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -111,7 +136,7 @@ const Cart2 = ({ cartData, handleCartRemove, handleCartAdd, totalCost, handleCar
                                                 <ButtonGroup className={classes.cartButtonGroup} variant="text">
                                                     <Button onClick={() => handleCartRemove(item.label, item.name, item.cost / item.count)}>-</Button>
                                                     <Button><strong>{item.count}</strong></Button>
-                                                    <Button onClick={() => handleCartAdd(item.label, item.name, item.cost / item.count)}>+</Button>
+                                                    <Button onClick={() => handleCartAdd(item.label, item.name, item.cost / item.count, item.recipe)}>+</Button>
                                                 </ButtonGroup>
                                                 <IconButton onClick={() => handleCartFullRemove(item.name)}>
                                                     <DeleteIcon className="trashCan"/>
@@ -127,12 +152,24 @@ const Cart2 = ({ cartData, handleCartRemove, handleCartAdd, totalCost, handleCar
                         }
                     </List>
                     <div style={{ textAlign: "center" }}>
-                        {/* <TextField className="input" size="medium" value={customerName} onChange={(e) => setCustomerName(e.target.value)}/> */}
                         <Typography className="totalCost" variant="body1"><strong>Total: ${numberWithCommas(totalCost)}</strong></Typography>
-                        <Button className="submitButton" variant="contained" color="primary" onClick={() => placeOrder()}>Submit Order</Button>
+                        <Button className="submitButton" variant="contained" color="primary" onClick={() => handleSubmit()}>Submit Order</Button>
                     </div>
                 </Card>
             </div>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Customer Name</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Enter name for this order</DialogContentText>
+                    <form noValidate autoComplete="off" onSubmit={e => { e.preventDefault(); }}>
+                        <Input error={error} placeholder="" inputProps={{ 'aria-label': 'description' }} onChange={(e) => handleCustomerName(e)}/>
+                    </form>
+                </DialogContent>
+                <DialogActions>
+                    <Button size="small" variant="outlined" onClick={() => handleClose(true)}>Confirm</Button>
+                    <Button size="small" variant="outlined" color="secondary" onClick={() => handleClose(false)}>Cancel</Button>
+                </DialogActions>
+            </Dialog>
         </Fragment>
     )
 }

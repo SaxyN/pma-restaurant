@@ -3,6 +3,7 @@ import { useSelector, useDispatch, connect } from 'react-redux';
 import { createStructuredSelector } from "reselect";
 import { makeStyles, Typography, Grid, Button, Card, CardActions, CardContent, Paper, CardMedia, ListItem, ListItemText, ListItemSecondaryAction, ButtonGroup, Divider, List, Box, AccordionSummary, Accordion, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import * as apis from '../apis/apis.js';
 
 import * as restActions from '../store/restaurant/restaurant.actions';
 import Cart from '../components/Cart';
@@ -95,7 +96,6 @@ const MenuContainer = () => {
     }));
 
     const handleCartRemove = (label, name, cost) => {
-        console.log("Removing from Cart: " + label, name, cost)
         var i;
         var found = false;
         for(i = 0; i < cartData.length; i++) {
@@ -136,8 +136,7 @@ const MenuContainer = () => {
         }
     }
 
-    const handleCartAdd = (label, name, cost) => {
-        console.log("Adding to Cart: " + label, name, cost)
+    const handleCartAdd = (label, name, cost, recipe) => {
         var i;
         var found = false;
         for(i = 0; i < cartData.length; i++) {
@@ -147,6 +146,7 @@ const MenuContainer = () => {
                     const newData = cartData;
                     newData[i].count += 1;
                     newData[i].cost = newData[i].cost + cost;
+                    newData[i].img = name;
                     console.log(newData);
                     dispatch(restActions.updateCart(newData));
                     break;
@@ -157,14 +157,13 @@ const MenuContainer = () => {
         }
         if (!found) {
             const newData = cartData;
-            newData.push({label: label, name: name, cost: cost, count: 1});
+            newData.push({label: label, name: name, cost: cost, img: name, count: 1, recipe: recipe});
             console.log(newData);
             dispatch(restActions.updateCart(newData));
         }
     }
 
-    const handleCartBulkAdd = (label, name, cost) => {
-        console.log("Adding to Cart: " + label, name, cost)
+    const handleCartBulkAdd = (label, name, cost, recipe) => {
         var i;
         var found = false;
         for(i = 0; i < cartData.length; i++) {
@@ -174,6 +173,7 @@ const MenuContainer = () => {
                     const newData = cartData;
                     newData[i].count += 25;
                     newData[i].cost = newData[i].cost + cost*25;
+                    newData[i].img = name;
                     console.log(newData);
                     dispatch(restActions.updateCart(newData));
                     break;
@@ -184,14 +184,17 @@ const MenuContainer = () => {
         }
         if (!found) {
             const newData = cartData;
-            newData.push({label: label, name: name, cost: cost*25, count: 25});
+            newData.push({label: label, name: name, cost: cost*25, item: name, count: 25, recipe: recipe});
             console.log(newData);
             dispatch(restActions.updateCart(newData));
         }
     }
 
-    const placeOrder = () => {
-        console.log("Order Placed");
+    const placeOrder = (cart, name) => {
+        console.log(cart);
+        console.log(name);
+        apis.sendOrder(cart,name,totalCost);
+        dispatch(restActions.clearCart());
     }
 
     return (
@@ -208,6 +211,7 @@ const MenuContainer = () => {
                 handleCartAdd={handleCartAdd}
                 totalCost={totalCost}
                 handleCartFullRemove={handleCartFullRemove}
+                placeOrder={placeOrder}
             />
         </div>
     )

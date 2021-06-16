@@ -10,6 +10,11 @@ export const UPDATE_CART = "UPDATE_CART";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
+export const CLEAR_CART = "CLEAR_CART";
+
+export const SET_TEMP_PRICE = "SET_TEMP_PRICE";
+export const SET_SELECTED_ITEM = "SET_SELECTED_ITEM";
+
 export const CLEAR_RESTAURANT_DATA = "CLEAR_RESTAURANT_DATA";
 
 export const loadRestaurantData = (data) => {
@@ -41,6 +46,8 @@ export const softLoadData = (data) => {
 export const showUI = (data) => {
     return (dispatch) => {
         if (process.env.NODE_ENV == "development") {
+            dispatch(loadUI())
+        } else {
             dispatch(loadUI())
         }
     }
@@ -140,5 +147,31 @@ export const clearRestaurantData = () => {
         dispatch({
             type: CLEAR_RESTAURANT_DATA
         });
+    }
+}
+
+export const clearCart = () => {
+    return (dispatch) => {
+        dispatch({
+            type: CLEAR_CART
+        });
+    }
+}
+
+export const setTempPrice = (price) => {
+    return (dispatch) => {
+        dispatch({
+            type: SET_TEMP_PRICE,
+            payload: price,
+        })
+    }
+}
+
+export const setSelectedItem = (item) => {
+    return (dispatch) => {
+        dispatch({
+            type: SET_SELECTED_ITEM,
+            payload: item,
+        })
     }
 }

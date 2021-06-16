@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import * as apis from '../apis/apis.js';
 
 import Order from '../components/Order';
 
@@ -10,17 +11,22 @@ const useStyles = makeStyles((theme) => ({
 
 const OrderContainer = () => {
     const classes = useStyles();
-    const {orderData} = useSelector((state) => ({
-        orderData: state.restaurant.orders
+    const {orderData, userData} = useSelector((state) => ({
+        orderData: state.restaurant.orders,
+        userData: state.restaurant.user_data,
     }));
 
-    const cookOrder = () => {
-        console.log("cooking Order")
+    const cookOrder = (order) => {
+        apis.cookOrder(order);
+    }
+    
+    const deleteOrder = (order) => {
+        apis.deleteOrder(order);
     }
 
     return (
         <Fragment>
-            <Order orderData={orderData} cookOrder={cookOrder}/>
+            <Order orderData={orderData} cookOrder={cookOrder} deleteOrder={deleteOrder}/>
         </Fragment>
     )
 }

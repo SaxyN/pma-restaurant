@@ -30,15 +30,6 @@
             "img": "green_taco"
         },
         {
-            "name": "Burger",
-            "recipe": {
-                "cola": 1
-            },
-            "cost": 1000,
-            "in_cart": 0,
-            "img": "burger"
-        },
-        {
             "name": "Beer",
             "recipe": {
                 "cola": 1
@@ -48,9 +39,7 @@
             "img": "beer"
         }
     ],
-    "menu_data": {
-        "restaurant_name": "the Taco Farmer"
-    },
+    "menu_data": "the Taco Farmer",
     "user_data": {
         "name": "Derek Fhreebs",
         "job_name": "boss"
@@ -58,33 +47,39 @@
     "orders": [
         {
             "customer": "Eduardo Chupador",
-            "cost": 300,
+            "cost": 800,
             "items": [
                 {
-                    "name": "Garlic",
+                    "name": "French Fries",
                     "count": 2,
-                    "img": "garlic"
+                    "img": "french_fries",
+                    "recipe": {
+                        "potato": 2
+                    }
                 }
             ]
         },
         {
             "customer": "Derek Fhreebs",
-            "cost": 2650,
+            "cost": 1500,
             "items": [
                 {
                     "name": "Burger",
                     "count": 2,
-                    "img": "burger"
+                    "img": "burger",
+                    "recipe": {
+                        "buns": 1,
+                        "hamburger_patty": 1,
+                        "condiments": 1
+                    }
                 },
                 {
-                    "name": "Spicy Taco",
-                    "count": 2,
-                    "img": "spicy_taco"
-                },
-                {
-                    "name": "French Fries",
-                    "count": 2,
-                    "img": "french_fries"
+                    "name": "Canned Cola",
+                    "count": 1,
+                    "img": "cola",
+                    "recipe": {
+                        "cola": 1
+                    }
                 }
             ]
         }

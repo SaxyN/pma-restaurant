@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { loadRestaurantData, showUI } from '../store/restaurant/restaurant.actions';
+import { hideUI, loadRestaurantData, showUI } from '../store/restaurant/restaurant.actions';
+import * as apis from '../apis/apis.js';
 
 export default () => {
     const dispatch = useDispatch();
@@ -14,29 +15,25 @@ export default () => {
         };
     }, []);
 
-    useEffect(() => {
-        if (process.env.NODE_ENV === "development") {
-            window.postMessage({jobName: "burgershot"})
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (process.env.NODE_ENV === "development") {
+    //         window.postMessage({jobName: "burgershot"})
+    //     }
+    // }, []);
 
     const actionListener = (event) => {
-        switch (event.data.jobName) {
-            case "burgershot":
-                if (process.env.NODE_ENV === "development") {
-                    if (event.data.jobName) {
-                        dispatch(showUI());
-                        dispatch(loadRestaurantData());
-                    }
-                }
-            case "henhouse":
-                if (process.env.NODE_ENV === "development") {
-                    if (event.data.jobName) {
-                        // dispatch(showBurgerShot());
-                    }
-                }
-            default:
-                null;
+        if (process.env.NODE_ENV === "development") {
+            dispatch(showUI());
+            dispatch(loadRestaurantData());
+        } else {
+            if (event.data.showTablet) {
+                dispatch(showUI());
+                dispatch(loadRestaurantData(event.data.bundle))
+            } else if (event.data.bundle) {
+                dispatch(loadRestaurantData(event.data.bundle))
+            } else {
+                dispatch(hideUI());
+            }
         }
     };
 

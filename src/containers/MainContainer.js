@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme) => ({
         margin: "0 auto",
         display: "flex",
         flexWrap: "wrap",
+        minWidth: "60%",
         width: "80%",
-        overflow: "auto",
+        overflow: "hidden",
         border: "solid",
         opacity: 50,
-
         "& .app-bar": {
             zIndex: theme.zIndex.drawer + 1,
             color: "#fff",
@@ -73,15 +73,15 @@ export default (props) => {
             )
         } else { // Live
             return (
-            <Fade in={showUI} timeout={1000,1000}>
-                <div className={classes.main}>
-                    <Listener />
-                    <Header />
-                    <Grid className="container" container>
-                        <Grid className="wrapper" justify="center" container>{props.children}</Grid>
-                    </Grid>
-                </div>
-            </Fade>
+                <Fade in={showUI} timeout={1000,1000}>
+                    <div className={classes.main}>
+                        <Listener />
+                        <Header />
+                        <Grid className="container" container>
+                            <Grid className="wrapper" justify="center" container>{props.children}</Grid>
+                        </Grid>
+                    </div>
+                </Fade>
             )
         }
     }

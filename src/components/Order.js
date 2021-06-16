@@ -1,8 +1,12 @@
 import React, { Fragment, useEffect} from 'react';
-import { makeStyles, Card, List, ListItem, ListItemText, AccordionSummary, Accordion, Typography, Divider, AccordionDetails, AccordionActions, Button } from '@material-ui/core';
+import { makeStyles, Card, List, ListItem, ListItemText, AccordionSummary, Accordion, Typography, Divider, AccordionDetails, AccordionActions, Button, DialogContent } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ItemImage from './ItemImage';
+import { Dialog } from '@material-ui/core';
+import { DialogTitle } from '@material-ui/core';
+import { DialogContentText } from '@material-ui/core';
+import { DialogActions } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     cardDiv: {
@@ -42,11 +46,42 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Order = ({cookOrder, orderData}) => {
+const Order = ({cookOrder, orderData, deleteOrder}) => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+    const [currentOrder, setCurrentOrder] = React.useState();
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    const handleClickOpen = (order) => {
+        setOpen(true);
+        setCurrentOrder(order);
+    }
+
+    const handleClose = (ready) => {
+        if (ready === true) {
+            setOpen(false);
+            deleteOrder(currentOrder);
+        } else {
+            setOpen(false);
+        }
+    }
+    
+    const handleClickOpen2 = (order) => {
+        setOpen2(true);
+        setCurrentOrder(order);
+    }
+
+    const handleClose2 = (ready) => {
+        if (ready === true) {
+            setOpen2(false);
+            cookOrder(currentOrder);
+        } else {
+            setOpen2(false);
+        }
     }
 
     return (
@@ -68,14 +103,15 @@ const Order = ({cookOrder, orderData}) => {
                                             return (
                                                 <div key={index2}>
                                                     <ItemImage name={item2.img} className="image" />
-                                                    <Typography variant="body2" color="textSecondary">{item2.name} x{item2.count}</Typography>
+                                                    <Typography variant="body2" color="textSecondary">{item2.label} x{item2.count}</Typography>
                                                 </div>
                                             )
                                         })}
                                     </AccordionDetails>
                                     <Divider />
                                     <AccordionActions>
-                                        <Button size="small" color="primary" onClick={() => cookOrder()}>Cook</Button>
+                                        <Button size="small" color="secondary" onClick={() => handleClickOpen(item)}>Delete</Button>
+                                        <Button size="small" color="primary" onClick={() => handleClickOpen2(item)}>Cook</Button>
                                     </AccordionActions>
                                 </Accordion>
                             </ListItem>
@@ -83,6 +119,26 @@ const Order = ({cookOrder, orderData}) => {
                     })}
                 </List>
             </Card>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Delete Order Confirmation</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Are you sure you want to delete this order?</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button variant="outlined" color="secondary" onClick={() => handleClose(true)}>Yes</Button>
+                    <Button variant="outlined" onClick={() => handleClose(false)}>No</Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={open2} onClose={handleClose2}>
+                <DialogTitle>Cook Order Confirmation</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Are you sure you want to cook order for: {currentOrder?currentOrder.customer:null}?</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button variant="outlined" color="secondary" onClick={() => handleClose2(true)}>Yes</Button>
+                    <Button variant="outlined" onClick={() => handleClose2(false)}>No</Button>
+                </DialogActions>
+            </Dialog>
         </Fragment>
     )
 }
