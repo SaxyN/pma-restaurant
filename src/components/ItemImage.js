@@ -1,7 +1,6 @@
 import BURGER from '../assets/burger.png';
 import CHICKEN_FILLET from '../assets/chicken_fillet.png';
 import COLA from '../assets/cola.png';
-import FRENCH_FRIES from '../assets/french_fries.png';
 import GARLIC from '../assets/garlic.png';
 import MILKSHAKE from '../assets/milkshake.png';
 import MIXING_BOWL from '../assets/mixing_bowl.png';
@@ -84,6 +83,42 @@ import PULLED_PORK from '../assets/pulledpork.png';
 import RIBS from '../assets/ribs.png';
 import VENISON from '../assets/venison.png';
 
+// Tequila-la
+import PRETZEL from '../assets/pretzel.png';
+import TEQ_SUNRISE from '../assets/tsunrise.png';
+import FPICKLES from '../assets/fpickles.png';
+import TEQUILA from '../assets/tequila.png';
+import MINUTE_MAID from '../assets/minute_maid.png';
+import CHILI_CHEESE from '../assets/cheese_fries.png';
+
+// Chihuahua Hotdogs
+import CORN_DOG from '../assets/corndog.png';
+import LEMONADE from '../assets/lemonade.png';
+import LOADED_FRIES from '../assets/loadedfries.png';
+import MEXICAN_COLA from '../assets/mex_cola.png';
+import MOZZY_STICKS from '../assets/mozzysticks.png';
+import ORINGS from '../assets/orings.png';
+import TOP_DOG from '../assets/topdog.png';
+import CHILI_DOG from '../assets/chillidog.png';
+
+// Burger Shot
+import MONEY_SHOT from '../assets/ms_burger.png';
+import BLEEDER from '../assets/burger.png';
+import FRENCH_FRIES from '../assets/french_fries.png';
+import CHICKEN_STRIPS from '../assets/chicken_strips.png';
+import GREASE_CREAM from '../assets/grease_cream.png';
+import NOMEAT from '../assets/nomeat_burger.png';
+
+// Pizza   
+import ALFREDO from '../assets/alfredo.png';
+import LINGUINE from '../assets/linguine.png';
+import PASTA_FAGOOL from '../assets/pasta_fagool.png';
+import SPAGHETTI from '../assets/spaghetti.png';
+import TIRAMISU from '../assets/tiramisu.png';
+import ACUTO_DI_SOPRANO from '../assets/acuto_di_soprano.png';
+
+import GUINNESS from '../assets/guinness.png'
+
 import { Fragment } from 'react';
 
 const ItemImage = ({ name }) => {
@@ -102,8 +137,6 @@ const ItemImage = ({ name }) => {
             return <img className="image" src={FRENCH_FRIES} />;
         case "garlic":
             return <img className="image" src={GARLIC} />;
-        case "green_taco":
-            return <img className="image" src={GREEN_TACO} />;
         case "mixing_bowl":
             return <img className="image" src={MIXING_BOWL} />;
         case "packaged_chicken":
@@ -120,8 +153,6 @@ const ItemImage = ({ name }) => {
             return <img className="image" src={MILKSHAKE} />;
         case "spice":
             return <img className="image" src={SPICE} />;
-        case "spicy_taco":
-            return <img className="image" src={SPICY_TACO} />;
         case "taco_shell":
             return <img className="image" src={TACO_SHELL} />;
         case "superpuff":
@@ -232,6 +263,58 @@ const ItemImage = ({ name }) => {
             return <img className="image" src={RIBS} />;
         case "venison":
             return <img className="image" src={VENISON} />;
+        case "pretzel":
+            return <img className="image" src={PRETZEL} />;
+        case "tsunrise":
+            return <img className="image" src={TEQ_SUNRISE} />;
+        case "tequila":
+            return <img className="image" src={TEQUILA} />;
+        case "fpickles":
+            return <img className="image" src={FPICKLES} />;
+        case "cheese_fries":
+            return <img className="image" src={CHILI_CHEESE} />;
+        case "minute_maid":
+            return <img className="image" src={MINUTE_MAID} />;
+        case "corndog":
+            return <img className="image" src={CORN_DOG} />;
+        case "lemonade":
+            return <img className="image" src={LEMONADE} />;
+        case "loadedfries":
+            return <img className="image" src={LOADED_FRIES} />;
+        case "mex_cola":
+            return <img className="image" src={MEXICAN_COLA} />;
+        case "mozzysticks":
+            return <img className="image" src={MOZZY_STICKS} />;
+        case "orings":
+            return <img className="image" src={ORINGS} />;
+        case "topdog":
+            return <img className="image" src={TOP_DOG} />;
+        case "chillidog":
+            return <img className="image" src={CHILI_DOG} />;
+        case "ms_burger":
+            return <img className="image" src={MONEY_SHOT} />;
+        case "grease_cream":
+            return <img className="image" src={GREASE_CREAM} />;
+        case "chicken_strips":
+            return <img className="image" src={CHICKEN_STRIPS} />;
+        case "bleeder":
+            return <img className="image" src={BLEEDER} />;
+        case "alfredo":
+            return <img className="image" src={ALFREDO} />;
+        case "linguine":
+            return <img className="image" src={LINGUINE} />;
+        case "pasta_fagool":
+            return <img className="image" src={PASTA_FAGOOL} />;
+        case "spaghetti":
+            return <img className="image" src={SPAGHETTI} />;
+        case "tiramisu":
+            return <img className="image" src={TIRAMISU} />;
+        case "acuto_di_soprano":
+            return <img className="image" src={ACUTO_DI_SOPRANO} />;
+        case "nomeat_burger":
+            return <img className="image" src={NOMEAT} />;
+        case "guinness":
+            return <img className="image" src={GUINNESS} />;
         default:
             return <Fragment/>
     }

@@ -82,6 +82,7 @@ const Menu2 = ({handleCartAdd, handleCartBulkAdd, foodData, userData}) => {
                                         <Card className={classes.cardMain} elevation={3}>
                                             <CardContent className="cardContent">
                                                 <ItemImage name={item.img}/>
+                                                {/* <img className="image" src={"../assets/" + item.img + ".png"} /> */}
                                                 <Typography variant="h6" component="h2">{item.name}</Typography>
                                                 <Typography color="textSecondary" component="p">${numberWithCommas(item.cost)}</Typography>
                                             </CardContent>
