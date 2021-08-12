@@ -6,7 +6,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import * as restActions from '../../store/restaurant/restaurant.actions';
 
-
 const useStyles = makeStyles((theme) => ({
     mainDiv: {
         display: "flex",

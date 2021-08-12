@@ -1,7 +1,7 @@
 {
     "food_items": [
         {
-            "name": "Spicy Taco",
+            "name": "Rainbow Cake",
             "recipe": {
                 "mixed_condiments": 1,
                 "ground_beef": 2,
@@ -9,25 +9,25 @@
             },
             "cost": 650,
             "in_cart": 0,
-            "img": "spicy_taco"
+            "img": "rainbow_cake"
         },
         {
-            "name": "Carne Asada Taco",
+            "name": "Cookies",
             "recipe": {
                 "frozen_french_fries": 1
             },
             "cost": 150,
             "in_cart": 0,
-            "img": "carne_asada_taco"
+            "img": "cookies"
         },
         {
-            "name": "Green Taco",
+            "name": "Chocolate Cake",
             "recipe": {
                 "cola": 1
             },
             "cost": 100,
             "in_cart": 0,
-            "img": "green_taco"
+            "img": "chocolate_cake"
         },
         {
             "name": "Beer",
@@ -82,6 +82,37 @@
                     }
                 }
             ]
+        }
+    ],
+    "companies": [
+        {
+            "name": "Johnson Supply Company",
+            "job_name": "supply"
+        },
+        {
+            "name": "Johnny's Trade Goods",
+            "job_name": "trade_goods"
+        },
+        {
+            "name": "Pegasus",
+            "job_name": "pegasus"
+        }
+    ],
+    "ingredients": [
+        {
+            "name": "Cabbage"
+        },
+        {
+            "name": "Meat"
+        },
+        {
+            "name": "Vodka"
+        },
+        {
+            "name": "Fish"
+        },
+        {
+            "name": "Dough"
         }
     ]
 }

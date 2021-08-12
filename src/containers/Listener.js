@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { hideUI, loadRestaurantData, showUI } from '../store/restaurant/restaurant.actions';
+import { loadSupplyData } from '../store/supply/supply.actions';
 import * as apis from '../apis/apis.js';
 
 export default () => {
@@ -25,6 +26,7 @@ export default () => {
         if (process.env.NODE_ENV === "development") {
             dispatch(showUI());
             dispatch(loadRestaurantData());
+            dispatch(loadSupplyData());
         } else {
             if (event.data.showTablet) {
                 dispatch(showUI());

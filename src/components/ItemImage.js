@@ -1,3 +1,8 @@
+// Company Stuff
+import PEGASUS from '../assets/pegasus.png';
+import TRADE_GOODS from '../assets/trade_goods.png';
+import JSC from '../assets/JSC_LOGO.jpg';
+
 import BURGER from '../assets/burger.png';
 import CHICKEN_FILLET from '../assets/chicken_fillet.png';
 import COLA from '../assets/cola.png';
@@ -60,7 +65,7 @@ import CLUB_SANDWICH from '../assets/csandwich.png';
 import HAM_TORTELLINI from '../assets/hamtortellini.png';
 import LASAGNA from '../assets/lasagna.png';
 import CANNOLI from '../assets/cannoli.png';
-import ITALIAN_SODA from '../assets/italiansoda.png';
+import ITALIAN_SODA from '../assets/italian_soda.png';
 import ESPRESSO from '../assets/espresso.png';
 import WINE from '../assets/wine.png';
 import AMARETTO from '../assets/amaretto.png';
@@ -82,6 +87,7 @@ import APPLE_PIE from '../assets/applepie.png';
 import PULLED_PORK from '../assets/pulledpork.png';
 import RIBS from '../assets/ribs.png';
 import VENISON from '../assets/venison.png';
+import PEPSI from '../assets/pepsi.png';
 
 // Tequila-la
 import PRETZEL from '../assets/pretzel.png';
@@ -119,7 +125,29 @@ import ACUTO_DI_SOPRANO from '../assets/acuto_di_soprano.png';
 
 import GUINNESS from '../assets/guinness.png'
 
+// Ortega's
+import ADIOS from '../assets/adios_motherfucker.png';
+import AGUA_FRESCA from '../assets/agua_fresca.png';
+import BURRITO from '../assets/burrito_de_pollo.png';
+import CHIPS_QUESO from '../assets/chips_and_queso.png';
+import ELOTE from '../assets/elote.png';
+import ENCHILADAS from '../assets/enchiladas.png';
+import FLAN from '../assets/flan.png';
+import TAMALES from '../assets/tamales.png';
+
+// Bakery
+import CHOCOLATE_CAKE from '../assets/chocolate_cake.png';
+import COOKIES from '../assets/cookies.png';
+import CROISSANT from '../assets/croissant.png';
+import CUPCAKE from '../assets/cupcake.png';
+import DONUT from '../assets/donut.png';
+import FANCY_COCO from '../assets/fancy_coco.png';
+import RAINBOW_CAKE from '../assets/rainbow_cake.png';
+import WEDDING_CAKE from '../assets/wedding_cake.png';
+
+
 import { Fragment } from 'react';
+import { ImageAspectRatioOutlined } from '@material-ui/icons';
 
 const ItemImage = ({ name }) => {
     switch (name) {
@@ -231,7 +259,7 @@ const ItemImage = ({ name }) => {
             return <img className="image" src={LASAGNA} />;
         case "cannoli":
             return <img className="image" src={CANNOLI} />;
-        case "italiansoda":
+        case "italian_soda":
             return <img className="image" src={ITALIAN_SODA} />;
         case "espresso":
             return <img className="image" src={ESPRESSO} />;
@@ -315,6 +343,46 @@ const ItemImage = ({ name }) => {
             return <img className="image" src={NOMEAT} />;
         case "guinness":
             return <img className="image" src={GUINNESS} />;
+        case "adios_motherfucker":
+            return <img className="image" src={ADIOS} />;
+        case "agua_fresca":
+            return <img className="image" src={AGUA_FRESCA} />;
+        case "chips_and_queso":
+            return <img className="image" src={CHIPS_QUESO} />;
+        case "elote":
+            return <img className="image" src={ELOTE} />;
+        case "enchiladas":
+            return <img className="image" src={ENCHILADAS} />;
+        case "flan":
+            return <img className="image" src={FLAN} />;
+        case "tamales":
+            return <img className="image" src={TAMALES} />;
+        case "burrito_de_pollo":
+            return <img className="image" src={BURRITO} />;
+        case "pegasus":
+            return <img className="image" src={PEGASUS} />;
+        case "trade_goods":
+            return <img className="image" src={TRADE_GOODS} />;
+        case "supply":
+            return <img className="image" src={JSC} />;
+        case "pepsi":
+            return <img className="image" src={PEPSI} />;
+        case "chocolate_cake":
+            return <img className="image" src={CHOCOLATE_CAKE} />;
+        case "cookies":
+            return <img className="image" src={COOKIES} />;
+        case "croissant":
+            return <img className="image" src={CROISSANT} />;
+        case "cupcake":
+            return <img className="image" src={CUPCAKE} />;
+        case "fancy_coco":
+            return <img className="image" src={FANCY_COCO} />;
+        case "rainbow_cake":
+            return <img className="image" src={RAINBOW_CAKE} />;
+        case "wedding_cake":
+            return <img className="image" src={WEDDING_CAKE} />;
+        case "donut":
+            return <img className="image" src={DONUT} />;
         default:
             return <Fragment/>
     }

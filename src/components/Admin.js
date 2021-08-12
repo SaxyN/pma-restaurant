@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Divider, makeStyles, Typography, Card, Grid, CardContent, TextField, List, ListItem, Accordion, AccordionDetails, AccordionSummary, ListItemText, AccordionActions, Button, CardActions } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import ItemImage from './ItemImage';
+import SupplyPanel from './SupplyPanel';
 import * as restActions from '../store/restaurant/restaurant.actions';
 import * as apis from '../apis/apis.js';
 
@@ -70,6 +71,12 @@ const useStyles = makeStyles((theme) => ({
     },
     accordion: {
         width: "100%",
+        
+    },
+    accordion2: {
+        width: "100%",
+        padding: "0px",
+        
     },
     listItem: {
         paddingTop: "2px",
@@ -77,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Admin = ({ foodData, tempPrice, selectedItem }) => {
+const Admin = ({ foodData, tempPrice, selectedItem, companies, currentCompany }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
@@ -122,7 +129,7 @@ const Admin = ({ foodData, tempPrice, selectedItem }) => {
                                     </AccordionSummary>
                                     <Divider />
                                     <AccordionDetails>
-                                        <form className={classes.textRoot} noValidate autoComplete="off">
+                                        <form className={classes.textRoot} noValidate autoComplete="off" onSubmit={e => { e.preventDefault(); }}>
                                             <TextField
                                                 id="item-price"
                                                 label="Price Change"
@@ -164,6 +171,23 @@ const Admin = ({ foodData, tempPrice, selectedItem }) => {
                                     </AccordionActions>
                                 </Accordion>
                             </ListItem>
+                            {/* <ListItem className={classes.listItem} dense>
+                                <Accordion square className={classes.accordion2}>
+                                    <AccordionSummary>
+                                        <ListItemText primary="Supply Ordering"/>
+                                        <ListItemText secondary="Select the desired ingredient(s), select the company, and hit 'Purchase'"/>
+                                    </AccordionSummary>
+                                    <Divider />
+                                    <AccordionDetails style={{padding: "0px"}}>
+                                        <SupplyPanel companies={companies} currentCompany={currentCompany}/>
+                                    </AccordionDetails>
+                                    <Divider />
+                                    <AccordionActions>
+                                    <Button size="small" color="primary">PURCHASE</Button>
+
+                                    </AccordionActions>
+                                </Accordion>
+                            </ListItem> */}
                         </List>
                     </Card>
                 </div>

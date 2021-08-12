@@ -8,7 +8,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 
 
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import thunk from "redux-thunk";
 import combineReducers from "./store/index";
 import "@fontsource/roboto";
@@ -21,7 +21,7 @@ import Menu from './components/Menu';
 import OrderContainer from "./containers/OrderContainer";
 import AdminContainer from "./containers/AdminContainer";
 
-const middle = [thunk, logger];
+const middle = [thunk];
 const store = createStore(combineReducers, applyMiddleware(...middle));
 
 ReactDOM.render(
